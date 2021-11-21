@@ -153,8 +153,8 @@ class Urlshortner extends Component{
         const showChooseComponent = () => {
             document.querySelector("#choose-component").hidden = false;
         }
-        const requestUrl = () => {
-            this.setState({choicetype:1});
+        const requestUrl = async() => {
+            await this.setState({choicetype:1});
 
             document.querySelector("#choose-component").hidden = true;
             const key={choicetype:this.state.choicetype,longurl:this.state.longurl,userchoice:this.state.userchoice,chosenshorturl:this.state.usershorturl,username:this.state.username};
@@ -264,7 +264,7 @@ class Urlshortner extends Component{
                         </Col>
                         <Col md={4} style={{textAlign:"center"}}>
                         <Button variant="light" id="linkoption1" 
-                                onClick={fetchResult}
+                                onClick={this.requestUrl}
                                 style={{fontSize:"18px", textAlign:"center", color:"white", width:"80%", border:"2px solid black", padding:"15px 20px", borderRadius:"3px", margin:"auto", backgroundColor:"#262A53"}}  >
                                 Get this Link
                             </Button>
