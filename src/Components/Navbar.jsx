@@ -13,7 +13,7 @@ class Navcomp extends Component {
       <div>
      <Navbar collapseOnSelect expand="lg" style={{background:"#262A53", width:"100%"}} className="navbar">
             <Container>
-            <Navbar.Brand href="#home"> <Image src={logo} style={{height:"40px", weight:"40px"}}/> </Navbar.Brand>
+            <Navbar.Brand> <Image src={logo} style={{height:"40px", weight:"40px"}}/> </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto" >
