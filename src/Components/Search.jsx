@@ -13,7 +13,7 @@ class Urlshortner extends Component{
     componentDidMount()
     {
         var key={shorturl:this.props.shorturl};
-        fetch('http://192.168.1.6:8000/search',{
+        fetch('https://tallyurl-backend.herokuapp.com/search',{
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
