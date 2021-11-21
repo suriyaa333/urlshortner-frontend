@@ -91,7 +91,7 @@ class Urlshortner extends Component{
             document.querySelector("#shrink-btn").innerText = "Shrinked";
             const key={url:this.state.longurl};
            
-            fetch('http://localhost:8000/',{
+            fetch('http://192.168.1.6:8000/',{
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -145,7 +145,7 @@ class Urlshortner extends Component{
             await this.setState({isLinkActivate: false});
             const key={choicetype:this.state.choicetype,longurl:this.state.longurl,userchoice:this.state.userchoice,chosenshorturl:this.state.chosenshorturl,username:this.state.username};
 
-            fetch('http://localhost:8000/insertshorturl',{
+            fetch('http://192.168.1.6:8000/insertshorturl',{
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -163,7 +163,7 @@ class Urlshortner extends Component{
             document.querySelector("#choose-component").hidden = true;
             const key={choicetype:this.state.choicetype,longurl:this.state.longurl,userchoice:this.state.userchoice,chosenshorturl:this.state.usershorturl,username:this.state.username};
 
-            fetch('http://localhost:8000/insertshorturl',{
+            fetch('http://192.168.1.6:8000/insertshorturl',{
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -327,7 +327,7 @@ class Urlshortner extends Component{
                 <h2 className="mt-5 mb-5"> My Shrinkes </h2>
                 <Button className="mb-5" onClick={()=>{
                     var key={username:this.state.username};
-                     fetch('http://localhost:8000/gettable',{
+                     fetch('http://192.168.1.6:8000/gettable',{
                         method: 'POST',
                         headers: {
                             'Content-Type' : 'application/json'

@@ -40,7 +40,7 @@ class Loginsignup extends Component{
                         
                         <Button variant="dark" onClick={()=>{
                                 var key={name:this.state.email.split("@")[0],password:this.state.password};
-                              fetch('http://localhost:8000/login',{
+                              fetch('http://192.168.1.6:8000/login',{
                                 method: 'POST',
                                 headers: {
                                     'Content-Type' : 'application/json'
@@ -93,7 +93,7 @@ class Loginsignup extends Component{
                         <Button variant="dark" onClick={()=>{
                             
                             var key={name:this.state.email.split("@")[0],password:this.state.password};
-                             fetch('http://localhost:8000/signup',{
+                             fetch('http://192.168.1.6:8000/signup',{
                                 method: 'POST',
                                 headers: {
                                     'Content-Type' : 'application/json'
