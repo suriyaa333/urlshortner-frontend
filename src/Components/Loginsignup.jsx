@@ -40,7 +40,7 @@ class Loginsignup extends Component{
                         
                         <Button variant="dark" onClick={()=>{
                                 var key={name:this.state.email.split("@")[0],password:this.state.password};
-                              fetch('https://tallyurl-backend.herokuapp.com/login',{
+                              fetch('http://localhost:8000/login',{
                                 method: 'POST',
                                 headers: {
                                     'Content-Type' : 'application/json'
@@ -92,7 +92,7 @@ class Loginsignup extends Component{
                         <Button variant="dark" onClick={()=>{
                             
                             var key={name:this.state.email.split("@")[0],password:this.state.password};
-                             fetch('https://tallyurl-backend.herokuapp.com/signup',{
+                             fetch('http://localhost:8000/signup',{
                                 method: 'POST',
                                 headers: {
                                     'Content-Type' : 'application/json'

@@ -45,7 +45,7 @@ class Linkmodel extends Component{
                         <Col md={10} style={{ paddingRight:"0px"}}>
                              <Button disabled variant="light"
                              style={{width:"100%"}}
-                             > shr.nk/hiuoJ </Button>                            
+                             > https://tallyurl.herokuapp.com/{this.props.chosenurl} </Button>                            
                         </Col>
                         <Col md={2} style={{paddingLeft:"0px"}}>
                             <Button variant="light" onClick={this.props.copy}
@@ -61,9 +61,7 @@ class Linkmodel extends Component{
                             <a href="https://web.whatsapp.com/" target="_blank"><i class="fab fa-whatsapp fa-2x share-icon"></i></a>
                             
                         </Col>
-                        {/* <Col> <i class="fab fa-instagram"></i> </Col> */}
-                        {/* <Col> <i class="fab fa-email"></i> </Col> */}
-                        {/* <Col> <i class="fab fa-whatsapp"></i> </Col> */}
+                        
                     </Row>
                 </Modal.Body>
                 

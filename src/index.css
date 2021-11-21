@@ -40,3 +40,20 @@ ul.nav.nav-tabs {
   background-color: #313563;
   border: 2px solid #262A53;
 }
+
+.highlight-chosen-option{
+  border: 1px solid #4fd88d;
+  background-color: red;
+}
+
+.selected-option{
+  background-color: #262A53;
+  color: white !important;
+}
+a{
+  text-decoration: none;
+}
+.share-icon{
+  color:#262A53;
+  padding:10px;
+}
