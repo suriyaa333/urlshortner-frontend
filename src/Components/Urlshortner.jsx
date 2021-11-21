@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Container, Form, Button, Row, Col,Image } from "react-bootstrap";
 import mainImage from "../Images/main.jpeg";
+import Linkmodel from "./Linkmodel";
 class Urlshortner extends Component{
     constructor(props){
         super(props);
@@ -11,12 +12,53 @@ class Urlshortner extends Component{
             shorturlC:"",
             userchoice:"A",
             username:"surya",
-            chosenshorturl:""
+            chosenshorturl:"",
+            isShow : false,
+            selectedShortUrl: "",
+            isLinkActivate: false
             
         }
+        this.closeLinkModel = this.closeLinkModel.bind(this);
+        this.copyToClipboard = this.copyToClipboard.bind(this);
     }
-
+    closeLinkModel = async() => {
+        await this.setState({isShow: false});
+    }
+    copyToClipboard = async() => {
+        // await navigate.clipboard.writeText(this.state.selectedShortUrl);
+    }
     render(){
+
+        const handleShrink = () => {
+            document.querySelector("#linkresult").hidden = false;
+            document.querySelector("#shrink-btn").innerText = "Shrinked";
+        }
+        
+        const highlightChosenOption = async(id) => {
+            // var num = id.slice(-1);
+            var num = parseInt(id.slice(-1));
+            // document.querySelector("#linkoption"+num).style.border = "2px solid #4fd88d";
+            document.querySelector("#linkoption"+num).classList.add("selected-option");
+            document.querySelector("#linkoption"+((num+1)%3)).classList.remove("selected-option");
+            document.querySelector("#linkoption"+((num+2)%3)).classList.remove("selected-option");
+            
+            // document.querySelector("#linkoption"+((num+2)%3)).style.border = "2px solid black";
+            // document.querySelector("#get-link-btn").disabled = false;
+
+            await this.setState({selectedShortUrl: document.querySelector("#"+id).innerText})
+        }
+        const fetchResult = async () => {
+            await this.setState({isShow: true});
+            if(this.state.selectedShortUrl !== "") {
+                await this.setState({isLinkActivate: true});
+            }
+            
+        }
+
+        const closeLinkModel = async() => {
+            await this.setState({isShow: false});
+        }
+
         return(
             <>
               <Container>
@@ -39,8 +81,26 @@ class Urlshortner extends Component{
 
             
              <Container>
-                 
+             <Form>
+                    <Form.Group className="">
+                        <Row>
+                            <Col md={9} >
+                                <Form.Control type="url" placeholder="Paste here to see the Magic!" style={{height:"50px"}}/> 
+                            </Col>
+                            <Col md={3} >
+                                <Button variant="primary"
+                                onClick={handleShrink}
+                                
+                                style={{height:"50px", backgroundColor:"#FFA0A0", border:"none", padding:"10px 20px", color:"#262A53"}} 
+                                id="shrink-btn"
+                                > 
+                                Shrink it </Button> </Col>
+                        </Row>
+                    </Form.Group>
+                    
+                </Form>
                 <Form>
+                    
                     <Form.Group className="">
                       
                         <Row>
