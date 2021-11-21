@@ -17,9 +17,9 @@ class Navcomp extends Component {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto" >
-                <Nav.Link href="#features" style={{color:"white", margin:"0px 10px"}} className="navlink">Get Premium</Nav.Link>
-                <Nav.Link href="#pricing" style={{color:"white", margin:"0px 10px"}} className="navlink">My Smashes </Nav.Link>
-                <Nav.Link href="/errorpage" style={{color:"white", margin:"0px 10px", borderBottom:"1px solid #FFA0A0"}} className="navlink"> Login </Nav.Link>
+                <Nav.Link  style={{color:"white", margin:"0px 10px"}} className="navlink">Get Premium</Nav.Link>
+                <Nav.Link style={{color:"white", margin:"0px 10px"}} className="navlink">My Smashes </Nav.Link>
+                <Nav.Link id="namee" style={{color:"white", margin:"0px 10px", borderBottom:"1px solid #FFA0A0"}} className="navlink"> Login </Nav.Link>
                 </Nav>  
             </Navbar.Collapse>
             </Container>

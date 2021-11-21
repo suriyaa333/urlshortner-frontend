@@ -36,7 +36,10 @@ class Urlshortner extends Component{
         // await navigate.clipboard.writeText(this.state.selectedShortUrl);
     }
    
-   
+    componentDidMount()
+    {
+        this.setState({username:document.querySelector("#namee").innerText})
+    }
     rendertable()
     {
        
@@ -61,22 +64,22 @@ class Urlshortner extends Component{
     {
         if(this.state.finalavailability===1)
         {
-            return this.state.usershorturl;
+            return "https://tallyurl.herokuapp.com/"+this.state.usershorturl;
         }
         if(this.state.rand===0)
         {
-            return this.state.shorturlA;
+            return "https://tallyurl.herokuapp.com/"+this.state.shorturlA;
         
         }
         if(this.state.rand===1)
         {
             
-               return this.state.shorturlB;
+               return "https://tallyurl.herokuapp.com/"+this.state.shorturlB;
             
         }
         if(this.state.rand===2)
         {
-            return this.state.shorturlC;
+            return "https://tallyurl.herokuapp.com/"+this.state.shorturlC;
         }
       
         
@@ -118,6 +121,7 @@ class Urlshortner extends Component{
             await this.setState({selectedShortUrl: document.querySelector("#"+id).innerText})
         }
         const fetchResult = async () => {
+            
             if(this.state.rand===0){
 
                 await this.setState({userchoice:"A"});
@@ -171,8 +175,10 @@ class Urlshortner extends Component{
                 if(res.output===1){
                     document.querySelector("#choose-result").innerHTML = "  <i class='fa fa-check'></i> Available  ";
                     document.querySelector("#choose-result").style.color = "green";    
+
                    await this.setState({finalavailability:1});
                    await this.setState({chosenshorturl:this.state.usershorturl});
+                  ;
                 }
                 else{
                     document.querySelector("#choose-result").innerHTML = "<i class='fa fa-times'></i> Not Available  check for another one!";
@@ -197,7 +203,7 @@ class Urlshortner extends Component{
 
         return(
             <>
-            <Linkmodel show={this.state.isShow} closeModel={this.closeLinkModel} chosenurl={this.state.chosenshorturl} isActive={this.state.isLinkActivate} copy={this.copyToClipboard}/>
+            <Linkmodel show={this.state.isShow} closeModel={this.closeLinkModel} chosenurl={this.state.usershorturl} isActive={this.state.isLinkActivate} copy={this.copyToClipboard}/>
               <Container>
             <Row>
                 <Col md={7} style={{marginTop:"100px"}}>
@@ -264,7 +270,7 @@ class Urlshortner extends Component{
                         </Col>
                         <Col md={4} style={{textAlign:"center"}}>
                         <Button variant="light" id="linkoption1" 
-                                onClick={this.requestUrl}
+                                onClick={fetchResult}
                                 style={{fontSize:"18px", textAlign:"center", color:"white", width:"80%", border:"2px solid black", padding:"15px 20px", borderRadius:"3px", margin:"auto", backgroundColor:"#262A53"}}  >
                                 Get this Link
                             </Button>

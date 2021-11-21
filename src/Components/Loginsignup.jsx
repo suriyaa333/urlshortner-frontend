@@ -50,7 +50,10 @@ class Loginsignup extends Component{
                                     return res.json();
                                 }).then((res)=>{
                                     if(res.success==1)
+                                    {
+                                        document.querySelector("#namee").innerText=this.state.email.split("@")[0];
                                     this.props.func();
+                                    }
 
                                 })
                             
@@ -59,9 +62,7 @@ class Loginsignup extends Component{
                             Login
                         </Button>
 
-                        <Button variant="light"  style={{}}>
-                            Google 
-                        </Button>
+                       
                     </Form>
                 </>
             );
