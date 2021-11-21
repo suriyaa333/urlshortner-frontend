@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# Tally-Hackathon-Submission - A One-Stop Platform to Generate and Manage Short URLs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About Our Submission
+- Our submission involves the implementation of a one-stop platform that handles a URL Shortening service in the form of a web app. 
+- The platform enables customization of the shortened URL in the form of multiple options provided to the end user from which he can choose from. 
+- The core algorithm behind the URL shortening has been developed using Base 62 encryption technique which involves generating the unique Base-62 hash for the corresponding long url along with optimizations to be scaled while maintaining its core efficiency. 
+- The platform is able to maintain high look-up and write times using a synchronous counter mechanism, which enables us to generate a unique short URL for each corresponding long URL, hence ensuring that there are always no collisions in the database. 
+- The user is also provided with a dashboard to manage all the short links that he has generated using the platform, and view detailed statistics on each of the links such as the geographic locations from which the website has been accessed from, number of clicks, etc. 
+- Secure authentication using SHA-256 algorithm to verify the user credentials.
 
-## Available Scripts
+## Tech Stack
+### Frontend
+- React JS
+- HTML, CSS, Javascript
+- Bootstrap, React-bootstrap, Google-Fonts
 
-In the project directory, you can run:
+### Backend
+- Node JS
+- Express Server
+- MongoDB Atlas (Cloud NoSQL Database)
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Business Value
+- Our solution also aims to bring business value by providing a premium service which enables the user to go for extra customization options and view detailed statistics on the generated short URL. 
+- Our platform also enables the user to directly share the generated short URL through a single click onto multiple platforms such as Facebook, Instagram, Email, Whatsapp, etc.
