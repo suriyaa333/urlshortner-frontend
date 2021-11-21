@@ -37,7 +37,7 @@ class Urlshortner extends Component{
             </Row>
             </Container>
 
-
+            
              <Container>
                  
                 <Form>
@@ -52,7 +52,7 @@ class Urlshortner extends Component{
 
                                     const key={url:this.state.longurl};
                                    
-                                    fetch('http://localhost:8000',{
+                                    fetch('https://tallyurl-backend.herokuapp.com/',{
                                     method: 'POST',
                                     headers: {
                                         'Content-Type' : 'application/json'
@@ -91,12 +91,11 @@ class Urlshortner extends Component{
                        await this.setState({chosenshorturl:this.state.shorturlC});
                    
                    }}>{this.state.shorturlC}</p>
-
                    <Button onClick={()=>{
                       
                        const key={longurl:this.state.longurl,userchoice:this.state.userchoice,chosenshorturl:this.state.chosenshorturl,username:this.state.username};
 
-                       fetch('http://localhost:8000/insertshorturl',{
+                       fetch('https://tallyurl-backend.herokuapp.com/insertshorturl',{
                        method: 'POST',
                        headers: {
                            'Content-Type' : 'application/json'
