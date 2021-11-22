@@ -57,3 +57,13 @@ a{
   color:#262A53;
   padding:10px;
 }
+#shrink {
+  padding: 50px 200px;
+}
+@media (max-width: 768px){
+
+  #shrink{
+    background-color: red;
+    padding: 50px 20px;
+  }
+  }

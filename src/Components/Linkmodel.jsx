@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { Switch, Route, Redirect} from "react-router-dom";
 
-import {  Container, Row, Col, Button, Modal, ButtonGroup} from "react-bootstrap";
+import {  Container, Row, Col, Button, Modal, ButtonGroup,OverlayTrigger,Popover} from "react-bootstrap";
 // import * from 'font-awesome'
 
 class Linkmodel extends Component{
@@ -14,17 +14,25 @@ class Linkmodel extends Component{
     }
     renderModalContent = () => {
         // alert("alerted");
+        const popover = (
+            <Popover id="popover-basic">
+              
+              <Popover.Body>
+                Copied to Clipboard
+              </Popover.Body>
+            </Popover>
+          );
         if(this.props.isActive === false){
             return(
                 <>
                 <Modal.Header>
-                <Modal.Title>Your Link is Active</Modal.Title>
+                <Modal.Title>Uh..oh</Modal.Title>
                 <Button variant="light"
                     onClick={this.props.closeModel}
                 ><i class="fas fa-times" 
                 ></i></Button>
                 </Modal.Header>
-                <Modal.Body>Please do select a Short URL</Modal.Body>
+                <Modal.Body>{this.props.error}</Modal.Body>
                 
                 </>
             )
@@ -45,12 +53,14 @@ class Linkmodel extends Component{
                         <Col md={10} style={{ paddingRight:"0px"}}>
                              <Button disabled variant="light"
                              style={{width:"100%"}}
-                             > https://tallyurl.herokuapp.com/{this.props.chosenurl} </Button>                            
+                             > https://tallyurl.herokuapp.com/{this.props.chosenurl()} </Button>                            
                         </Col>
                         <Col md={2} style={{paddingLeft:"0px"}}>
+                        <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
                             <Button variant="light" onClick={this.props.copy}
                                 style={{width:"100%", backgroundColor:"white", border:"none", outline:"none"}} > <i class="fas fa-copy"></i></Button>
-                        </Col>
+                            </OverlayTrigger>
+                              </Col>
                     </Row>
                     <Row style={{marginTop:"20px"}}><Col><h4>Share </h4></Col></Row>
                     <Row>
@@ -70,6 +80,7 @@ class Linkmodel extends Component{
         }
     }
     render(){
+
         return(
             <>
             

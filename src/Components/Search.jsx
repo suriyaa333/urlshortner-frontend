@@ -29,9 +29,11 @@ class Urlshortner extends Component{
             window.location.href=res.longurl;
            
            }
+          
            
         })
     }
+    
     addcomponent()
     {
         if(this.state.linkstatus===0)
@@ -42,7 +44,7 @@ class Urlshortner extends Component{
     render(){
         return(
             <>
-           
+           {this.addcomponent()}
             </>
         )
     }

@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Container, Form, Button, Row, Col,Image,Table} from "react-bootstrap";
 import mainImage from "../Images/main.jpeg";
 import Linkmodel from "./Linkmodel";
+import Analyse from "./Analyse";
 class Urlshortner extends Component{
     constructor(props){
         super(props);
@@ -20,22 +21,48 @@ class Urlshortner extends Component{
             choicetype:0,
             rand:Math.floor(Math.random() * 3),
             usershorturl:"",
-            finalavailability:0
+            finalavailability:0,
+            transaction:[],
+            chromeusers:0,
+            firefoxusers:0,
+            ieusers:0,
+            otherusers:0,
+            mobileusers:0,
+            laptopusers:0,
+            clickspersite:0,
+            totalclicks:0,
+            top5shorturls:[],
+            top5shorturlclciks:[]
             
         }
         this.closeLinkModel = this.closeLinkModel.bind(this);
         this.copyToClipboard = this.copyToClipboard.bind(this);
         this.createbutton=this.createbutton.bind(this);
-     
+        this.createtransactions=this.createtransactions.bind(this);
+        this.openLinkModel=this.openLinkModel.bind(this);
+        this.getUrl=this.getUrl.bind(this);
       
     }
     closeLinkModel = async() => {
         await this.setState({isShow: false});
     }
-    copyToClipboard = async() => {
-        // await navigate.clipboard.writeText(this.state.selectedShortUrl);
+    openLinkModel = async() => {
+        await this.setState({isShow: true});
     }
    
+    copyToClipboard = async() => {
+        // await navigate.clipboard.writeText(this.state.selectedShortUrl);
+        // alert("will copy to clipboardd");
+        var text = "https://tallyurl.herokuapp.com/"+this.state.chosenshorturl;
+        console.log('text', text)
+        var textField = document.createElement('textarea')
+        textField.innerText = text
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove();
+
+    }
     componentDidMount()
     {
         this.setState({username:document.querySelector("#namee").innerText})
@@ -50,7 +77,7 @@ class Urlshortner extends Component{
                     <tr>
                     <td>{index+1}</td>
                     <td>{row.longurl}</td>
-                    <td><a href={row.longurl}>https://tallyurl.herokuapp.com/{row.shorturl}</a></td>
+                    <td>https://tallyurl.herokuapp.com/{row.shorturl}</td>
                     <td>{row.click}</td>
                     
                     </tr>
@@ -59,6 +86,99 @@ class Urlshortner extends Component{
             })
        );
       
+    }
+    createtransactions()
+    {
+    var key={username:this.state.username};
+        fetch('https://tallyurl-backend.herokuapp.com/getalltransactions',{
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify(key)
+        }).then((res)=>{
+        if(res.ok)
+        return res.json();
+        }).then((res)=>{
+           
+        this.setState({transaction:res});
+            console.log("res ")
+            console.log(res);
+            this.setState({chromeusers:0});
+            this.setState({firefoxusers:0});
+            this.setState({ieusers:0});
+            this.setState({otherusers:0});
+            this.setState({mobileusers:0});
+            this.setState({laptopusers:0});
+            this.setState({top5shorturlclciks:[]});
+            this.setState({top5shorturls:[]});
+            
+        res.forEach(obj => {
+            
+            if(obj["browser"]==="Chrome")
+            {
+                var c=parseInt(this.state.chromeusers);
+                c=c+1;
+                this.setState({chromeusers:c});
+            }
+            if(obj["browser"]==="Firefox")
+            {
+                var c=parseInt(this.state.firefoxusers);
+                c=c+1;
+                this.setState({firefoxusers:c});
+            }
+            if(obj["browser"]==="Internet Explorer")
+            {
+                var c=this.state.ieusers;
+                c=c+1;
+                this.setState({ieusers:c});
+            }
+            if(obj["browser"]==="Other Browser")
+            {
+                var c=this.state.otherusers;
+                c=c+1;
+                this.setState({otherusers:c});
+            }
+            if(obj["ismobile"]===true)
+            {
+                var c=this.state.mobileusers;
+                c=c+1;
+                this.setState({mobileusers:c});
+            }
+            if(obj["ismobile"]===false)
+            {
+                var c=this.state.laptopusers;
+                c=c+1;
+                this.setState({laptopusers:c});
+            }
+           
+            
+            
+            
+        });
+        var tlen=this.state.transaction.length;
+        var sitescount=this.state.allrows.length;
+
+        this.setState({clickspersite:Math.ceil(tlen/sitescount)});
+        var allrows=this.state.allrows;
+        allrows.sort((a,b)=>(a.click < b.click ? 1 : -1))
+        console.log("allrows");
+        allrows.slice(0,5).forEach((obj)=>{
+            var topurl=obj["shorturl"];
+            var temp=this.state.top5shorturls;
+            temp.push(topurl);
+            this.setState({top5shorturls:temp});
+
+            var topclick=obj["click"];
+            temp=this.state.top5shorturlclciks;
+            temp.push(topclick);
+            this.setState({top5shorturlclciks:temp});
+
+        })
+       
+
+           
+        })
     }
     createbutton()
     {
@@ -84,30 +204,58 @@ class Urlshortner extends Component{
       
         
     }
+     getUrl = () => {
+        if(this.state.usershorturl !== ""){
+            return this.state.usershorturl;
+        }
+        return this.state.chosenshorturl;
+    }
     render(){
+        const isUrlValid = () => {
+            
+             var urlSelected = this.state.longurl;
+             var res = urlSelected.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%.\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%\+.~#?&//=]*)/g);
+             if(res == null)
+                 return false;
+             else
+                 return true;
+        }
 
         const handleShrink = async() => {
-            document.querySelector("#linkresult").hidden = false;
-            document.querySelector("#shrink-btn").innerText = "Shrinked";
-            const key={url:this.state.longurl};
            
-            fetch('https://tallyurl-backend.herokuapp.com/',{
-            method: 'POST',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body:JSON.stringify(key)
-            }).then((res)=>{
-            if(res.ok)
-            return res.json();
-            }).then(async(res)=>{
-                console.log(res[0].Ahash);
-               await this.setState({shorturlA:res[0].Ahash});
-               await this.setState({shorturlB:res[0].Bhash});
-               await this.setState({shorturlC:res[0].Chash});
+            if(isUrlValid()===false){
+
+                await this.setState({errorText: "Please input a valid Url"})
+                await this.setState({isLinkActivate: false});
+                await this.setState({isShow: true})
+
+            }
+            
+            else{
+                
+                document.querySelector("#linkresult").hidden = false;
+                document.querySelector("#shrink-btn").innerText = "Shrinked";
+                const key={url:this.state.longurl};
+           
+                fetch('https://tallyurl-backend.herokuapp.com/',{
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body:JSON.stringify(key)
+                }).then((res)=>{
+                if(res.ok)
+                return res.json();
+                }).then(async(res)=>{
+                    console.log(res[0].Ahash);
+                   await this.setState({shorturlA:res[0].Ahash});
+                   await this.setState({shorturlB:res[0].Bhash});
+                   await this.setState({shorturlC:res[0].Chash});
+                   
                
+                })
+            }
            
-            })
                                    
         }
 
@@ -187,23 +335,14 @@ class Urlshortner extends Component{
             })
            
         }
-        const isUrlValid = () => {
-            var userInput = "";
-            var regexQuery = "/(http(s)?://.)?(www\.)?[-a-zA-Z0-9@:%.\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%\+.~#?&//=]*)/";
-            var url = new RegExp(regexQuery,"g");
-            if (url.test(userInput)) {
-                alert('Great, you entered an E-Mail-address');
-                return true;
-            }
-            return false;
-        }
+        
         const closeLinkModel = async() => {
             await this.setState({isShow: false});
         }
-
+       
         return(
             <>
-            <Linkmodel show={this.state.isShow} closeModel={this.closeLinkModel} chosenurl={this.state.usershorturl} isActive={this.state.isLinkActivate} copy={this.copyToClipboard}/>
+            <Linkmodel show={this.state.isShow} error={this.state.errorText} closeModel={this.closeLinkModel} chosenurl={this.getUrl} isActive={this.state.isLinkActivate} copy={this.copyToClipboard}/>
               <Container>
             <Row>
                 <Col md={7} style={{marginTop:"100px"}}>
@@ -217,13 +356,13 @@ class Urlshortner extends Component{
                     </Row>
                 </Col>
                 <Col md={5}>
-                    <Image src={mainImage} />
+                    <Image className="d-none d-md-block" src={mainImage} />
                 </Col>
             </Row>
             </Container>
 
             
-            <Container fluid id="shrink" style={{margin:"30px auto", padding:"50px 200px", backgroundColor:"#262A53", visible:"hidden"}}>
+            <Container fluid id="shrink" style={{margin:"30px auto", backgroundColor:"#262A53", visible:"hidden"}}>
             <h2 
                     style={{color:"white"}}
                 > Shrink here </h2>
@@ -336,14 +475,15 @@ class Urlshortner extends Component{
                         }).then((res)=>{
                         if(res.ok)
                         return res.json();
-                        }).then(async(res)=>{
+                        }).then((res)=>{
                          
-                        await this.setState({allrows:res});
-                        console.log(this.state.allrows);
+                        this.setState({allrows:res});
+                            console.log(res.arr);
+                         console.log(this.state.allrows);
                         })
                 }}> Show Table </Button>
 
-                <Table striped bordered hover>
+                <Table responsive striped bordered hover>
                     
                     <thead>
                         <tr>
@@ -356,8 +496,30 @@ class Urlshortner extends Component{
 
                     <tbody>
                     {this.rendertable()}
+
                     </tbody>
                     </Table>
+                    
+                </Container>
+                <Container>
+                   
+                    <Button onClick={()=>{
+                        this.createtransactions();
+                        console.log(this.state.top5shorturlclciks);
+                       
+                    }}>View Detailed Analytics</Button>
+                    <Analyse 
+                chrome={this.state.chromeusers} 
+                firefox ={this.state.firefoxusers} 
+                ie={this.state.ieusers} 
+                other={this.state.otherusers} 
+                mobile={this.state.mobileusers} 
+                computer={this.state.laptopusers}
+                avgClick={this.state.clickspersite}
+                top5shorturls={this.state.top5shorturls}
+                top5shorturlclciks={this.state.top5shorturlclciks}
+                />
+                 
                     
                 </Container>
 

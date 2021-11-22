@@ -15,7 +15,14 @@ class Errorpage extends Component{
     render(){
         return(
             <>
-            <h1>Not Found</h1>
+           <Container style={{textAlign:"center"}}>
+                    <h1 style={{fontSize:"200px"}}>
+                        404 Error
+                    </h1>
+                    <h3>
+                        This short url is not active. Please Check Again!!
+                    </h3>
+                </Container>
             </>
         )
     }
