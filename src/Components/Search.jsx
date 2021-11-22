@@ -8,7 +8,7 @@ class Urlshortner extends Component{
           linkstatus:0
             
         }
-        this.addcomponent=this.addcomponent.bind(this);
+        
     }
     componentDidMount()
     {
@@ -30,6 +30,7 @@ class Urlshortner extends Component{
            
            }
           
+          
            
         })
     }
@@ -44,7 +45,7 @@ class Urlshortner extends Component{
     render(){
         return(
             <>
-           {this.addcomponent()}
+          
             </>
         )
     }

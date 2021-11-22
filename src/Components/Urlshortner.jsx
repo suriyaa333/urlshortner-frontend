@@ -350,7 +350,7 @@ class Urlshortner extends Component{
                     <Row> <Col> <h3> Get the shortest version of URL with our best choices </h3></Col></Row>
                     <Row> 
                         {/* <Button style={{margin:"30px 10px", backgroundColor:"#262A53", padding:"10px", outline:"none", border:"1px solid #262A53"}}> Get Premium</Button> */}
-                        <Button style={{margin:"30px 10px", backgroundColor:"white", color:"#262A53", outline:"none", border:"1px solid #262A53", padding:"10px 20px", fontSize:"20px"}}> 
+                        <Button href="#shrink"  style={{margin:"30px 10px", backgroundColor:"white", color:"#262A53", outline:"none", border:"1px solid #262A53", padding:"10px 20px", fontSize:"20px"}}> 
                         Shrink Now </Button>
                         
                     </Row>

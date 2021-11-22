@@ -87,7 +87,9 @@ class Loginsignup extends Component{
         await this.setState({isValid: false})
         await this.validateSignup();
         if(this.state.isValid === true){
-
+            await this.setState({errorText: "Account creation is Successful. Plese Login to Continue"});
+            await this.setState({modalHead: "Welcome!"});
+            await this.setState({show: true});
             var key={name:this.state.email.split("@")[0],password:this.state.password};
             fetch('https://tallyurl-backend.herokuapp.com/signup',{
                method: 'POST',
@@ -95,10 +97,6 @@ class Loginsignup extends Component{
                    'Content-Type' : 'application/json'
                },
                body:JSON.stringify(key)
-               }).then(async ()=>{
-                await this.setState({errorText: "Account creation is Successful. Plese Login to Continue"});
-                await this.setState({modalHead: "Welcome!"});
-                await this.setState({show: true});
                })
            
             
