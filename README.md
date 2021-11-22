@@ -1,5 +1,9 @@
 # Tally-Hackathon-Submission - A One-Stop Platform to Generate and Manage Short URLs
 
+## Deployment
+- Our website is live @ https://tallyurl.herokuapp.com/
+
+
 ## About Our Submission
 - Our submission involves the implementation of a one-stop platform that handles a URL Shortening service in the form of a web app. 
 - The platform enables customization of the shortened URL in the form of multiple options provided to the end user from which he can choose from. 
