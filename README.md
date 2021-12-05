@@ -26,3 +26,6 @@
 ## Business Value
 - Our solution also aims to bring business value by providing a premium service which enables the user to go for extra customization options and view detailed statistics on the generated short URL. 
 - Our platform also enables the user to directly share the generated short URL through a single click onto multiple platforms such as Facebook, Instagram, Email, Whatsapp, etc.
+
+## More Info
+For more info, checkout the powerpoint presentation, we have covered almost everything there!
